@@ -8,5 +8,5 @@ class AllBooks:
         self.soup = BeautifulSoup(pagecontent,'html.parser')
 
     @property
-    def __bool__(self):
+    def books(self):
          return [BookParser(e) for e in self.soup.select(All_Books_Locators.BOOKS)]
