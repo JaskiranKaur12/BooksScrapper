@@ -1,6 +1,8 @@
+import logging
+
 from app import books
 
-books_generator=(x for x in books)
+logger=logging.getLogger('Scraping.menu')
 
 USER_CHOICE= '''Enter one of the following
 
@@ -12,18 +14,22 @@ USER_CHOICE= '''Enter one of the following
 
 
 def print_best_books():
+    logger.info('finding best rated books')
     best_books=sorted(books, key=lambda x: x.rating*(-1))[:10]
     for b in best_books:
        print(b)
 
 
 def print_cheapest_books():
+    logger.info('finding cheapest books')
     cheapest_books=sorted(books, key=lambda x: x.price)[:10]
     for b in cheapest_books:
        print(b)
 
+books_generator=(x for x in books)
 
 def get_next_book():
+    logger.info('getting next book')
     print(next(books_generator))
 
 
@@ -41,6 +47,7 @@ def menu():
         else:
             print('Please choose a valid command')
         user_input = input(USER_CHOICE)
+    logger.debug('terminating program')
 
 menu()
 
